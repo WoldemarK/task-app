@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: auth-app
+
+keycloak:
+  server-url: http://localhost:8080
+  realm: task-realm
+  client-id: task-client
+  client-secret: XnS2z4EeHY6vkTeDGTGgHfzBNyGT9Ck1
+  admin:
+    username: admin
+    password: admin
+
+
+server:
+  port: 8081
