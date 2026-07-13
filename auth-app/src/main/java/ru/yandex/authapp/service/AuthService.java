@@ -48,11 +48,7 @@ public class AuthService {
         realm.users()
                 .get(userId)
                 .resetPassword(credential);
-        UserRepresentation createdUser = realm.users()
-                .get(userId)
-                .toRepresentation();
-        System.out.println(createdUser.getUsername());
-        System.out.println(createdUser.getRequiredActions());
+
     }
 
     private CredentialRepresentation getCredential(RegisterRequest request) {

@@ -1,14 +1,16 @@
 package ru.yandex.authapp.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.*;
 import ru.yandex.authapp.dto.LoginRequest;
 import ru.yandex.authapp.dto.RegisterRequest;
 import ru.yandex.authapp.dto.TokenResponse;
 import ru.yandex.authapp.service.AuthService;
+
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,5 +27,15 @@ public class AuthRestController {
     @PostMapping("/login")
     public TokenResponse login(@RequestBody LoginRequest request) {
         return authService.login(request);
+    }
+
+
+    @GetMapping("/me")
+    public Map<String, Object> me(@AuthenticationPrincipal Jwt jwt) {
+        return Map.of
+                ("id", jwt.getId(),
+                        "username", jwt.getClaimAsString("preferred_username"),
+                        "subject", jwt.getSubject()
+                );
     }
 }
