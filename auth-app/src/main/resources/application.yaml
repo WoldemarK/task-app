@@ -2,6 +2,12 @@ spring:
   application:
     name: auth-app
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/task-realm
+
 keycloak:
   server-url: http://localhost:8080
   realm: task-realm

@@ -6,6 +6,7 @@ import org.keycloak.admin.client.CreatedResponseUtil;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import ru.yandex.authapp.dto.RegisterRequest;
 import ru.yandex.authapp.dto.TokenResponse;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -48,13 +50,23 @@ public class AuthService {
         realm.users()
                 .get(userId)
                 .resetPassword(credential);
-        UserRepresentation createdUser = realm.users()
-                .get(userId)
-                .toRepresentation();
-        System.out.println(createdUser.getUsername());
-        System.out.println(createdUser.getRequiredActions());
-    }
 
+        assignUserRole(realm, userId);
+
+    }
+    private void assignUserRole(RealmResource realm, String userId) {
+
+        RoleRepresentation userRole = realm.roles()
+                        .get("USER")
+                        .toRepresentation();
+
+
+        realm.users()
+                .get(userId)
+                .roles()
+                .realmLevel()
+                .add(List.of(userRole));
+    }
     private CredentialRepresentation getCredential(RegisterRequest request) {
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
