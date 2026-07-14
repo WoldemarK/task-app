@@ -46,7 +46,6 @@ public class AuthService {
 
         CredentialRepresentation credential = getCredential(request);
 
-
         realm.users()
                 .get(userId)
                 .resetPassword(credential);
