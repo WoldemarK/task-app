@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.taskserviceapp.entity.Task;
 import ru.yandex.taskserviceapp.entity.TaskStatus;
-import ru.yandex.taskserviceapp.notification.LoggingNotificationPublisher;
+import ru.yandex.taskserviceapp.notification.NotificationPublisher;
 import ru.yandex.taskserviceapp.notification.event.ReminderEvent;
 import ru.yandex.taskserviceapp.notification.event.TaskOverdueEvent;
 import ru.yandex.taskserviceapp.repository.TaskRepository;
@@ -21,7 +21,7 @@ import java.util.List;
 public class TaskLifecycleService {
 
     private final TaskRepository repository;
-    private final LoggingNotificationPublisher publisher;
+    private final NotificationPublisher publisher;
 
     @Transactional
     public void processReminders() {

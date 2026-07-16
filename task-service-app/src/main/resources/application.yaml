@@ -23,6 +23,17 @@ spring:
       ddl-auto: update
     show-sql: true
 
+app:
+  rabbitmq:
+    exchange: task.exchange
+
+    queues:
+      reminder: task.reminder.queue
+      overdue: task.overdue.queue
+
+    routing-keys:
+      reminder: task.reminder
+      overdue: task.overdue
 
 server:
   port: 8082

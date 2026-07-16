@@ -12,13 +12,9 @@ public record ValidationErrorResponse
         (
                 @JsonFormat(pattern = "dd.MM.yyyy-HH:mm")
                 LocalDateTime timestamp,
-
                 int status,
-
                 String message,
-
                 Map<String, String> errors,
-
                 String path
         ) {
 }
