@@ -8,6 +8,12 @@ spring:
         jwt:
           issuer-uri: http://localhost:8080/realms/task-realm
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
   datasource:
     url: jdbc:postgresql://localhost:5433/task_postgres
     username: task
