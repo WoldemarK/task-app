@@ -20,3 +20,14 @@ spring:
 
 server:
   port: 8082
+
+logging:
+  level:
+    org.hibernate.sql: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+
+task:
+  scheduler:
+    reminder-delay: 60000
+    overdue-delay: 60000
+

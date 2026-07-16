@@ -6,5 +6,6 @@ public enum TaskStatus {
     DONE,
     CANCELLED,
     POSTPONED,
+    OVERDUE,
     NEW
 }

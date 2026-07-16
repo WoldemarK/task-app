@@ -2,6 +2,7 @@ package ru.yandex.taskserviceapp.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.taskserviceapp.dto.CreateTaskRequest;
@@ -13,9 +14,7 @@ import ru.yandex.taskserviceapp.exception.TaskNotFoundException;
 import ru.yandex.taskserviceapp.mapper.TaskMapper;
 import ru.yandex.taskserviceapp.repository.TaskRepository;
 
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -46,13 +45,14 @@ public class TaskService {
     }
 
     @Transactional
-    public void delete(Long id, String userId){
+    public void delete(Long id, String userId) {
         Task task = taskRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found"));
         taskRepository.delete(task);
     }
+
     @Transactional
-            public TaskResponse updateTask(Long id, UpdateTaskRequest request, String userId) {
+    public TaskResponse updateTask(Long id, UpdateTaskRequest request, String userId) {
 
         Task task = taskRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + id));
@@ -82,6 +82,5 @@ public class TaskService {
                 .updatedAt(LocalDateTime.now())
                 .build();
     }
-
 
 }

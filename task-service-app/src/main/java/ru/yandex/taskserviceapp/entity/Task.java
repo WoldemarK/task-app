@@ -1,5 +1,6 @@
 package ru.yandex.taskserviceapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -43,11 +44,26 @@ public class Task {
     @Column(nullable = false)
     private String userId;
 
-    private LocalDateTime remindAt;
+    @Column(nullable = false)
+    @JsonFormat(pattern = "dd.MM.yyyy-HH:mm")
+    private LocalDateTime remindAt; // когда напомнить
+
+    @JsonFormat(pattern = "dd.MM.yyyy-HH:mm")
+    private LocalDateTime dueAt; // дедлайн
+
+    @JsonFormat(pattern = "dd.MM.yyyy-HH:mm")
+    private LocalDateTime completedAt; // Завершено
+
+    @Column(nullable = false)
+    private boolean reminderSent = false; //Чтобы не отправлять напоминание повторно
 
     @CreationTimestamp
+    @JsonFormat(pattern = "dd.MM.yyyy-HH:mm")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
+    @JsonFormat(pattern = "dd.MM.yyyy-HH:mm")
     private LocalDateTime updatedAt;
+
+
 }

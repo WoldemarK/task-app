@@ -1,18 +1,24 @@
 package ru.yandex.taskserviceapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
-import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@Data
-@Builder
-public class ValidationErrorResponse {
 
-    private LocalDateTime timestamp;
-    private int status;
-    private String message;
-    private Map<String, String> errors;
-    private String path;
+@Builder
+public record ValidationErrorResponse
+        (
+                @JsonFormat(pattern = "dd.MM.yyyy-HH:mm")
+                LocalDateTime timestamp,
+
+                int status,
+
+                String message,
+
+                Map<String, String> errors,
+
+                String path
+        ) {
 }
